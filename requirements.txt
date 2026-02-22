@@ -1,0 +1,11 @@
+# Dependencies for offline video transcription using Whisper
+# Script requires Python 3.9+ (recommended: 3.10/3.11)
+
+# Primary backend: openai-whisper (automatically installs torch as dependency)
+openai-whisper>=20231117
+
+# Optional fallback backend (uncomment if you prefer faster-whisper or if openai-whisper fails)
+# faster-whisper>=1.0.0
+
+# Note: ffmpeg must be installed separately on your system (not a pip package)
+# Windows: winget install FFmpeg.FFmpeg  or  choco install ffmpeg
