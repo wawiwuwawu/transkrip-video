@@ -53,6 +53,17 @@ Pilih model dan bahasa (contoh bahasa Indonesia):
 python transkrip.py "D:\path\ke\video.mp4" --model small --language id
 ```
 
+Pilih model yang lebih tinggi dan bahasa Jepang:
+```powershell
+python transkrip.py "D:\path\ke\video.mp4" --model medium --language ja   # model lebih tinggi, bahasa Jepang
+python transkrip.py "D:\path\ke\video.mp4" --model large-v3 --language ja # akurasi lebih tinggi, lebih berat
+```
+
+Kalau video ada di folder dan Anda ingin pakai GPU NVIDIA:
+```powershell
+python transkrip.py "D:\path\ke\folder-video" --model large-v3 --language ja --device cuda  # proses pakai GPU
+```
+
 Pilih device secara manual (cpu/cuda):
 ```powershell
 python transkrip.py "D:\path\ke\video.mp4" --device cpu
@@ -66,8 +77,14 @@ python transkrip.py "D:\path\ke\folder-video" --output-dir "D:\hasil-transkrip"
 # Jika punya GPU NVIDIA
 python transkrip.py "D:\video.mp4" -m medium -d cuda
 
+Contoh singkat untuk transkrip Jepang dengan model yang lebih tinggi:
+```powershell
+python transkrip.py "D:\video.mp4" -m large-v3 -l ja
+```
+
 ## Tips
 - Model lebih besar → lebih akurat namun lebih lambat dan makan RAM/VRAM.
+- Untuk bahasa Jepang, gunakan kode bahasa `ja` pada opsi `--language`.
 - Pastikan ruang disk cukup, Whisper akan membuat file audio sementara saat memproses.
 - Untuk bahasa campuran, biarkan `--language` kosong agar auto-detect.
  - Jika Anda hanya memiliki Python 3.13, pertimbangkan untuk memasang Python 3.11 khusus proyek ini.
