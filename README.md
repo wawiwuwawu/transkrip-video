@@ -3,7 +3,7 @@
 Aplikasi Python sederhana untuk mentranskrip video menjadi file TXT paragraf kontinu (tanpa timestamp) menggunakan model Whisper lokal.
 
 ## Fitur
-- Input: file video tunggal atau folder berisi banyak video.
+- Input: file video/audio tunggal atau folder berisi banyak video/audio.
 - Output: `.txt` per video, isi berupa paragraf kontinu dari awal sampai akhir.
 - Model: `tiny`, `base`, `small` (default), `medium`, `large-v3`.
 - Otomatis pilih CPU/GPU (bisa paksa via `--device`).
@@ -48,6 +48,8 @@ Transkrip semua video dalam folder (rekursif), hasil ke subfolder `transkrip`:
 ```powershell
 python transkrip.py "D:\path\ke\folder-video"
 ```
+
+Folder juga bisa berisi audio seperti `.ogg`, `.mp3`, `.wav`, `.m4a`, `.aac`, `.flac`, `.opus`, atau `.wma`.
 
 Pilih model dan bahasa (contoh bahasa Indonesia):
 ```powershell

@@ -23,8 +23,12 @@ from pathlib import Path
 import shutil
 
 
-VIDEO_EXTS = {
+MEDIA_EXTS = {
     ".mp4", ".mkv", ".avi", ".mov", ".m4v", ".webm", ".mpg", ".mpeg", ".flv", ".wmv", ".3gp"
+}
+
+AUDIO_EXTS = {
+    ".mp3", ".wav", ".m4a", ".aac", ".flac", ".ogg", ".opus", ".wma"
 }
 
 
@@ -47,7 +51,8 @@ def collect_video_files(input_path: Path) -> list[Path]:
         return [input_path]
     files: list[Path] = []
     for p in input_path.rglob("*"):
-        if p.suffix.lower() in VIDEO_EXTS and p.is_file():
+        suffix = p.suffix.lower()
+        if p.is_file() and (suffix in MEDIA_EXTS or suffix in AUDIO_EXTS):
             files.append(p)
     return sorted(files)
 
@@ -140,7 +145,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "input",
-        help="Path ke file video atau folder berisi video",
+        help="Path ke file video/audio atau folder berisi video/audio",
     )
     parser.add_argument(
         "-o", "--output-dir",
