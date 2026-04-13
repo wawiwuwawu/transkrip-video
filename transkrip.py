@@ -164,6 +164,11 @@ def parse_args() -> argparse.Namespace:
         choices=["cpu", "cuda"],
         default=None,
     )
+    parser.add_argument(
+        "--skip-existing",
+        help="Lewati file video jika file .txt output dengan nama yang sama sudah ada",
+        action="store_true",
+    )
     return parser.parse_args()
 
 
@@ -201,7 +206,14 @@ def main() -> int:
     print(f"Total video: {len(files)} | Output: {output_dir}")
 
     ok = 0
+    skipped = 0
     for f in files:
+        out_path = output_dir / (f.stem + ".txt")
+        if args.skip_existing and out_path.exists():
+            print(f"  ↷ Skip (sudah ada): {out_path}")
+            skipped += 1
+            continue
+
         try:
             text = transcribe_to_paragraph(loaded, f, args.language)
             out_path = write_txt(output_dir, f, text)
@@ -213,8 +225,8 @@ def main() -> int:
         except Exception as e:
             print(f"  ✗ Gagal: {f} → {e}", file=sys.stderr)
 
-    print(f"Selesai. Berhasil: {ok}/{len(files)}")
-    return 0 if ok == len(files) else 4
+    print(f"Selesai. Berhasil: {ok}/{len(files)} | Skip: {skipped}")
+    return 0 if (ok + skipped) == len(files) else 4
 
 
 if __name__ == "__main__":
